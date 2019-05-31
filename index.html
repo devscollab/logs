@@ -24,13 +24,13 @@
     </div>
   </nav>
   <div id="app">
-    <div class="main-container ">
+    <div class="main-container container">
       <div class="your-events">
-        <p v-if="your_events" @click="your_events = !your_events"><button class="btn deep-purple">Check your
-            Events</button></p>
+        <p v-if="your_events" @click="your_events = !your_events"><button class="btn deep-purple" id="check-btn">Check
+            your Events</button></p>
         <div v-else class="card" id="your-events-card">
-          <label for="input">Enter Github Username</label> <input type="text" placeholder="username">
-          <button class="btn center-block deep-purple">Check my events</button>
+          <label for="input">Enter Github Username</label> <input type="text" placeholder="username" id="newUsername">
+          <button class="btn center-block deep-purple" @click="changeApiUrl">Check my events</button>
         </div>
       </div>
       <div class="logs container">
@@ -47,7 +47,7 @@
             <div class="type">{{ i.type }}</div>
             <div class="repo-info">
               repo:
-              <a :href=" i.repo.name">
+              <a :href="'https://github.com/'+`${i.repo.name}` ">
                 <div class="repo-name">&nbsp; {{ i.repo.name}}</div>
               </a>
             </div>
@@ -66,6 +66,7 @@
               <div class="payload-title" v-if="i.type === 'PullRequestEvent'">
                 <!--IF the content type is pullrequest event-->
                 Action : {{i.payload.action}} <br>
+                Message : {{i.payload.pull_request.body}} <br>
                 Pull Request Info : Addition {{i.payload.pull_request.additions}} , Deletions
                 {{i.payload.pull_request.deletions}} , Changes {{i.payload.pull_request.changed_files}}
 
@@ -96,7 +97,7 @@
                 Forked to <a :href="i.payload.forkee.html_url">{{i.payload.forkee.html_url}}</a>
 
               </div>
-              <div class="payload-time">{{ i.created_at }}</div>
+              <div class="payload-time">Created at : {{ i.created_at.split('T')[0] }}</div>
             </div>
           </div>
         </div>

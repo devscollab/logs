@@ -16,6 +16,10 @@
     margin: 0 auto
 }
 
+#check-btn {
+    margin: 10px 60px
+}
+
 #your-events-card {
     padding: 10px 50px
 }
@@ -34,7 +38,7 @@
 }
 
 .actor-info {
-    width: 120px;
+
     display: flex;
     flex-direction: column;
     align-items: center
