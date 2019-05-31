@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Portfolio website for the Devs Collab" />
+  <meta name="keywords" content="devscollab, devs, collab, portfolio, developers, android, web, digital, opensource" />
+  <title>Logs for Devs Collab</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper" id="navbar">
+      <a href="/" class="brand-logo"> <b id="logo">DEVS COllAB</b> </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <!-- <li><a href="sass.html">Sass</a></li>
+          <li><a href="badges.html">Components</a></li>
+          <li><a href="collapsible.html">JavaScript</a></li> -->
+      </ul>
+    </div>
+  </nav>
+  <div id="app">
+    <div class="main-container ">
+      <div class="your-events">
+        <p v-if="your_events" @click="your_events = !your_events"><button class="btn deep-purple">Check your
+            Events</button></p>
+        <div v-else class="card" id="your-events-card">
+          <label for="input">Enter Github Username</label> <input type="text" placeholder="username">
+          <button class="btn center-block deep-purple">Check my events</button>
+        </div>
+      </div>
+      <div class="logs container">
+        <div v-for="i in list" class="card" id="info-card">
+          <div class="actor-info">
+            <div class="actor-avatar">
+              <img :src="i.actor.avatar_url" alt="" />
+            </div>
+            <div class="actor-login">{{i.actor.login}}</div>
+          </div>
+          <div class="content">
+            <div class="type">{{ i.type }}</div>
+            <div class="repo-info">
+              repo:
+              <a :href=" i.repo.name">
+                <div class="repo-name">&nbsp; {{ i.repo.name}}</div>
+              </a>
+            </div>
+            <div class="payload">
+              <div class="payload-title" v-if="i.type === 'CreateEvent'">
+                <!--IF the content type is create event-->
+                Title : {{ i.payload.description}}
+              </div>
+              <div class="payload-title" v-if="i.type === 'PushEvent'">
+                <!--IF the content type is push event-->
+                Commits :
+                <div class="commits" v-for="(commit,id) in i.payload.commits">
+                  {{id +1}} : {{commit.message}}
+                </div>
+              </div>
+              <div class="payload-title" v-if="i.type === 'PullRequestEvent'">
+                <!--IF the content type is pullrequest event-->
+                Action : {{i.payload.action}} <br>
+                Pull Request Info : Addition {{i.payload.pull_request.additions}} , Deletions
+                {{i.payload.pull_request.deletions}} , Changes {{i.payload.pull_request.changed_files}}
+
+              </div>
+              <div class="payload-title" v-if="i.type === 'IssueCommentEvent'">
+                <!--IF the content type is issuecomment event-->
+                Action : {{i.payload.action}} <br>
+                <a :href="i.payload.comment.html_url">
+                  {{ i.payload.comment.body}}
+                </a>
+
+              </div>
+              <div class="payload-title" v-if="i.type === 'IssuesEvent'">
+                <!--IF the content type is IssuesEvent event-->
+                Action : {{i.payload.action}} <br>
+                <a :href="i.payload.issue.html_url">
+                  {{ i.payload.issue.title}}
+                </a>
+
+              </div>
+              <div class="payload-title" v-if="i.type === 'WatchEvent'">
+                <!--IF the content type is WatchEvent event-->
+                Action : {{i.payload.action}}
+
+              </div>
+              <div class="payload-title" v-if="i.type === 'ForkEvent'">
+                <!--IF the content type is ForkEvent event-->
+                Forked to <a :href="i.payload.forkee.html_url">{{i.payload.forkee.html_url}}</a>
+
+              </div>
+              <div class="payload-time">{{ i.created_at }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- Importing scripts -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+<script src="/js/main.js"></script>
+
+</html>
