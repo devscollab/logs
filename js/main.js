@@ -3,16 +3,13 @@
 // never remove this !!!!!!!!!!!!!!
 //raj token 1d14756a4fe303a41b91799adf61a62ab45a37e0
 let headers = {
-    "Authorization": 'token 1d14756a4fe303a41b91799adf61a62ab45a37e0'
+    "Authorization": 'Token 1d14756a4fe303a41b91799adf61a62ab45a37e0'
 }
 
 // VUE JS
 let api_url = `https://api.github.com/orgs/devscollab/events`
 async function getEvents(api_url) {
-    let response = await fetch(api_url, {
-        method: 'GET',
-        headers
-    });
+    let response = await fetch(api_url);
     let data = await response.json()
     return data;
 }
