@@ -59,13 +59,4 @@
     }
 
 
-    .content {
-        width: 250px;
-        /* border: solid black 1px; */
-        margin: 0
-    }
-
-    .payload {
-        width: 200px
-    }
 }
