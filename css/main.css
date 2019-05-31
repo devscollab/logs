@@ -34,7 +34,8 @@
 .content {
     display: flex;
     flex-direction: column;
-    margin-left: 20px
+    margin-left: 20px;
+    width: 400px
 }
 
 .actor-info {
@@ -55,5 +56,9 @@
 @media only screen and (max-width: 600px) {
     #logo {
         margin: 0
+    }
+
+    #info-card {
+        width: 100vw
     }
 }
