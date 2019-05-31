@@ -37,7 +37,9 @@
         <div v-for="i in list" class="card" id="info-card">
           <div class="actor-info">
             <div class="actor-avatar">
-              <img :src="i.actor.avatar_url" alt="" />
+              <a :href="'https://github.com/'+`${i.actor.login}` ">
+                <img :src="i.actor.avatar_url" alt="" />
+              </a>
             </div>
             <div class="actor-login">{{i.actor.login}}</div>
           </div>
